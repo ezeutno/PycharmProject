@@ -103,7 +103,7 @@ while True:
             z = Bank(data_all, len(data_all), 'Bank')
             print('The Total number of customer is {0}'.format(str(z.getNumOfCustomers())))
             for i in range (z.getNumOfCustomers()):
-                print('[{0}] {1}'.format(i+1,z.getCustomer()))
+                print('[{0}] {1}'.format(i+1,z.getCustomers(i)))
             buffer_zone()
         else :
             break
