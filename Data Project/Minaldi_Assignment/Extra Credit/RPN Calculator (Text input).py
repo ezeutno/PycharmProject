@@ -1,7 +1,7 @@
-from InfixtoPostfix import main
+from InfixtoPostfix2 import *
 
 Answer2 = open('Answer.txt', 'w')
-data_operation = main()
+data_operation = main_run()
 stack = []
 
 
