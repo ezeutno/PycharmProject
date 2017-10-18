@@ -1,6 +1,7 @@
 from Add import Add
 from Edit import Edit
 
+import datetime
 
 class Account_Class(Add, Edit):
     def __init__(self, content):
@@ -12,14 +13,28 @@ class Account_Class(Add, Edit):
         fname = input('First Name          : ')
         lname = input('Last Name           : ')
         gender = input('Gender              : ')
-        email = input('Email               : ')
-        birth = input('Birthday DD/MM/YYYY : ')
+        while True:
+            email = input('Email               : ')
+            if email.__contains__('@') and email.__contains__('.'):
+                break
+            else:
+                print('An email should contain @ and .com/.co.id/and others.')
+        while True:
+            birth = input('Birthday DD/MM/YYYY : ')
+            l = birth.split('/')
+            if 0<int(l[0])<=31 and 1<=int(l[1])<=12 and 1900<=int(l[2])<=datetime.datetime.now().year:
+                break
+            else:
+                print('Input the right birthday')
         Add.addAccount(self, fname, lname, gender, email, birth,p)
 
     def updateAccount(self):
         open('Data_Base\\List_Account.txt', "w").write('')
         up_date = open('Data_Base\\List_Account.txt', "a")
         for i in range (len(self.__content)):
+            if len(self.__content[i][-2]) != 0:
+                if self.__content[i][-2][0] == '':
+                    self.__content[i][-2].pop(0)
             a = ''
             z = self.__content[i]
             for b in range(1,len(z[-2])):
@@ -70,4 +85,3 @@ class Account_Class(Add, Edit):
                 for i in range(count):
                     print('[{0}]'.format(len(self.__content) - count + 1), self.__content[-count][0], end=' ')
                     count -= 1
-        print('\n')

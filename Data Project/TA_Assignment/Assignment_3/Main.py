@@ -44,6 +44,7 @@ for i in all_acc:
 while True:
     try :
         clear()
+        display_output('LIBRARY')
         display_output('MENU')
         x = input('Input your command!')
         if x == '1':
@@ -142,20 +143,20 @@ while True:
                                     display_output('Borrow Book')
                                     BookClass(all_book).displayBook()
                                     BookClass(all_book).borrowBook(all_acc[num])
+                                    BookClass(all_book).updateBook()
                                     Account_Class(all_acc).updateAccount()
                                     buffer_zone()
                                 elif s == '4':
                                     clear()
                                     display_output('Borrowed Book')
                                     BookClass(all_book).displayBook_Acc(all_acc[num])
-                                    if len(all_acc[num][-2]) == 0:
-                                        print('NONE')
                                     buffer_zone()
                                 elif s == '5':
                                     clear()
                                     display_output('Returning Book')
                                     BookClass(all_book).returnBook(all_acc[num])
                                     Account_Class(all_acc).updateAccount()
+                                    BookClass(all_book).updateBook()
                                     buffer_zone()
                                 elif s == '6':
                                     clear()

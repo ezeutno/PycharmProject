@@ -78,12 +78,17 @@ class BookClass(Add,Edit):
                             else :
                                 print('Sorry, We only got {0}.'.format(i[-1]))
                         elif amt == 0:
-                            continue
+                            break
                 else:
                     print('Book out off stock!')
 
     def displayBook_Acc(self,account):
+        if len(account[-2]) != 0:
+            if account[-2][0] == '':
+                account[-2].pop(0)
         count = len(account[-2])
+        if count == 0:
+            print('NONE')
         while count != 0:
             if count >= 5:
                 for i in range(5):
@@ -94,7 +99,6 @@ class BookClass(Add,Edit):
                 for i in range(count):
                     print('[{0}]'.format(len(account[-2]) - count + 1), account[-2][-count], end=' ')
                     count -= 1
-        print('\n')
 
     def returnBook(self,account):
         BookClass(self.__content).displayBook_Acc(account)

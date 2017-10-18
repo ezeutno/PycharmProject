@@ -1,8 +1,15 @@
 MASTER;qwertyuiop;|||;;;1
 IE24551;12345678;Ivan|Ezechial|Male|ivan.suratno@gmail.com;24/09/1999;;0
-VS083;12345678;Vero|Stephanie|Female|vero95@gmail.com;08/07/1998;,Test2;0
+VS083;12345678;Vero|Stephanie|Female|vero95@gmail.com;08/07/1998;;0
 IE2421;;||Male|;24/09/1999;;1
 IE24991;123456789;Ivan|Ezechial|Male|ivan.suratnO@gmail.com;24/09/1999;;0
 FS09138;12345678;Frendy|Susanto|male|frendy@gmail.com;09/01/2000;;0
 BS22808;budi111222;budi|santoso|m|budi_santoso@gmail.com;22/09/1221;;0
-Frendy222;12345678;Frendy|Susanto|Male|frendy222@gmail.com;09/01/2000;;0
+FRENDY222;12345678;Frendy|Susanto|Male|frendy222@gmail.com;09/01/2000;;0
+JC16173;B!Nu$16122001;Jason|C. C.|Male|jason@gmail.com;16/12/2001;;0
+AA18511;12345678;Arkaan|Asadi|Male|Arkaan.Asadi@binus.ac.id;18/09/1999;;0
+TL24508;12345678;Test|Last|male|ivan.@;24/10/1999;;0
+VN04668;12345678;vero|nika|f|mmm@gmail.cm;04/05/1998;;0
+KB13842;12345678;kontol|besar|m|ivan.@;13/12/1999;;0
+IA1229;12345678;Ivan|ahsjdhas|male|ivan.@gmail.com;12/09/1999;;0
+IS24643;12345678;Ivan Ezechial|Suratno|Male|ivan.suratno@gmail.com;24/09/1999;;0
