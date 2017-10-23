@@ -14,7 +14,7 @@ class Ship(Sprite):
         self.rect.bottom = self.screen_rect.bottom
 
         self.centerx = float(self.rect.centerx)
-        self.centery = float(self.rect.bottom)
+        self.bottom = float(self.rect.bottom)
 
         self.moving_right = False
         self.moving_left = False
@@ -27,15 +27,15 @@ class Ship(Sprite):
         if self.moving_left and self.rect.left > 0:
             self.centerx -= self.ai_settings.ship_speed_factor
         if self.moving_down and self.rect.bottom <self.screen_rect.bottom:
-            self.centery += self.ai_settings.ship_speed_factor
+            self.bottom += self.ai_settings.ship_speed_factor
         if self.moving_up and self.rect.top > 0:
-            self.centery -= self.ai_settings.ship_speed_factor
+            self.bottom -= self.ai_settings.ship_speed_factor
         self.rect.centerx = self.centerx
-        self.rect.bottom = self.centery
+        self.rect.bottom = self.bottom
 
     def center_ship(self):
         self.centerx = self.screen_rect.centerx
-        self.centery = self.screen_rect.bottom
+        self.bottom = self.screen_rect.bottom
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)

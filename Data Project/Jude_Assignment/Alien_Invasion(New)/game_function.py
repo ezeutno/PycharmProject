@@ -1,11 +1,12 @@
 import sys
 import pygame
-#from pygame.locals import *
+from pygame.locals import *
 from bullet import Bullet
 from alien import Alien
 from random import randint
 from star import Star
 from time import sleep
+from music import Music
 
 #events
 def check_keydown_events(event,ai_settings,screen,ship,bullets):
@@ -53,26 +54,26 @@ def check_events(ai_settings,screen,stats,sb,play_button,ship,aliens,bullets):
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             check_play_button(ai_settings,screen,stats,sb, play_button,ship,aliens,bullets, mouse_x,mouse_y)
-        #elif event.type == VIDEORESIZE:
-        #    ai_settings.screen_height = event.h
-        #    ai_settings.screen_width = event.w
-        #    print(event.h,event.w)
-        #    print(ai_settings.screen_height,ai_settings.screen_width)
-        #    screen = pygame.display.set_mode((ai_settings.screen_width,ai_settings.screen_height),RESIZABLE)
+        elif event.type == VIDEORESIZE:
+            ai_settings.screen_height = event.h
+            ai_settings.screen_width = event.w
+            ai_settings.max_star = int(ai_settings.screen_width * 2 / 10)
+            ai_settings.min_star = int(ai_settings.screen_width/ 10)
+            return True
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event,ai_settings,screen,ship,bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
 #screen update
-def update_screen(ai_settings, screen,stats,stars,sb, bg_obj,fr_obj,play_button,alien,bullets):
+def update_screen(ai_settings, screen,stats,stars,sb, bg_obj,fr_obj,play_button,aliens,bullets):
     screen.fill(ai_settings.bg_color)
     stars.draw(screen)
     for i in bg_obj:
         i.blitme()
     for bullet in bullets.sprites():
         bullet.draw_bullet()
-    alien.draw(screen)
+    aliens.draw(screen)
     for i in fr_obj:
         i.blitme()
     sb.show_score()
@@ -83,18 +84,22 @@ def update_screen(ai_settings, screen,stats,stars,sb, bg_obj,fr_obj,play_button,
 #bullets
 def check_bullet_alien_colisions(ai_settings,screen,stats, sb,ship,aliens,bullets):
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    if len(aliens) == 0:
+        if ship.bottom != ship.screen_rect.bottom:
+            ship.center_ship()
+        else :
+            ship.center_ship()
+            bullets.empty()
+            ai_settings.increase_speed()
+            stats.level += 1
+            sb.prep_level()
+            create_fleet(ai_settings,screen,ship,aliens)
     if collisions:
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points*len(aliens)
             sb.prep_score()
         check_high_score(stats,sb)
-    if len(aliens) == 0:
-        ship.center_ship()
-        bullets.empty()
-        ai_settings.increase_speed()
-        stats.level += 1
-        sb.prep_level()
-        create_fleet(ai_settings,screen,ship,aliens)
+
 
 def check_high_score(stats,sb):
     if stats.score >stats.high_score:
@@ -111,6 +116,7 @@ def update_bullets(ai_settings,screen,stats, sb,ship,aliens,bullets):
 def fire_bullet(ai_settings, screen,ship,bullets):
     if len(bullets) < ai_settings.bullets_allowed:
         new_bullets = Bullet(ai_settings, screen, ship)
+        Music('Data_base\\Laser1.mp3', 0.5,0.0).effect()
         bullets.add(new_bullets)
 
 #aliens
@@ -145,6 +151,7 @@ def update_aliens(ai_settings, stats, screen,sb, ship, aliens,bullets):
     check_fleet_edges(ai_settings,aliens)
     aliens.update()
     if pygame.sprite.spritecollideany(ship,aliens):
+        Music('Data_base\\explo.mp3', 0.5,0.4).effect()
         ship_hit(ai_settings, stats,sb, screen, ship, aliens,bullets)
     check_aliens_bottom(ai_settings, stats, screen,sb, ship, aliens,bullets)
 
@@ -163,6 +170,7 @@ def check_aliens_bottom(ai_settings, stats,sb, screen, ship, aliens,bullets):
     screen_rect = screen.get_rect()
     for alien in aliens.sprites():
         if alien.rect.bottom >= screen_rect.bottom:
+            Music('Data_base\\explo.mp3', 0.5,0.4).effect()
             ship_hit(ai_settings, stats,sb, screen, ship, aliens,bullets)
             break
 
@@ -190,5 +198,3 @@ def create_multilayer_star(ai_setting, screen, stars):
     number_star = randint(ai_setting.min_star,ai_setting.max_star)
     for star_number in range(number_star):
         create_star(ai_setting,screen,stars)
-
-

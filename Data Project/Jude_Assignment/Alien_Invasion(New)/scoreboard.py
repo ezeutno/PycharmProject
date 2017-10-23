@@ -41,7 +41,7 @@ class Scoreboard():
         self.ships = Group()
         for ship_number in range(self.stats.ship_left):
             ship = Ship(self.ai_settings, self.screen)
-            ship.rect.x = self.screen_rect.centerx - int(ship.rect.width*3/2) + ship_number*ship.rect.width
+            ship.rect.x = self.screen_rect.centerx - int(ship.rect.width*self.stats.ship_left/2) + ship_number*ship.rect.width
             ship.rect.y = 10
             self.ships.add(ship)
 
