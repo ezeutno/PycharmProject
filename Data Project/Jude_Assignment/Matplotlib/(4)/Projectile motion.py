@@ -10,7 +10,7 @@ while True:
             z = int(input('Enter the angle of projection for trajectory {0} (degrees): '.format(i+1)))
             z_sin = round(math.sin(math.radians(z)),15)
             z_cos = round(math.cos(math.radians(z)),15)
-            g = 10
+            g = 9.807
             t = (2*y*z_sin)/g
             all_dis = []
             all_height = []
